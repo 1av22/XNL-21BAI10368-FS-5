@@ -1,32 +1,81 @@
 .videos-page {
-	padding: 20px;
+	padding: 2rem;
+	background: linear-gradient(135deg, #1a1c2c 0%, #2a3c54 100%);
+	min-height: 100vh;
 }
 
 .videos-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: 20px;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 2rem;
+	max-width: 1400px;
+	margin: 0 auto;
 }
 
 .video-item {
-	border: 1px solid #ddd;
-	padding: 15px;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 15px;
+	padding: 1.5rem;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(102, 252, 241, 0.2);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-item:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 20px rgba(102, 252, 241, 0.2);
 }
 
 .video-item video {
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 10px;
+	margin-bottom: 1rem;
 }
 
 .video-item h3 {
-	margin-top: 10px;
-	font-size: 1.2em;
+	color: #66fcf1;
+	font-size: 1.4rem;
+	margin-bottom: 0.8rem;
 }
 
 .video-item p {
 	margin-top: 5px;
 	font-size: 0.9em;
 	color: #666;
+}
+
+.video-sentiment {
+	background: rgba(102, 252, 241, 0.1);
+	padding: 0.8rem;
+	border-radius: 8px;
+	margin: 1rem 0;
+}
+
+.video-sentiment h4 {
+	color: #66fcf1;
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.sentiment-emoji {
+	font-size: 1.2rem;
+}
+
+.chat-link {
+	display: inline-block;
+	background: linear-gradient(45deg, #66fcf1, #45a29e);
+	color: #1f2833;
+	padding: 0.8rem 1.5rem;
+	border-radius: 25px;
+	text-decoration: none;
+	font-weight: 600;
+	margin-top: 1rem;
+	transition: all 0.3s ease;
+}
+
+.chat-link:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(102, 252, 241, 0.3);
 }
