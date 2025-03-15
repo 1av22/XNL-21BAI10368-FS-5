@@ -19,7 +19,9 @@ function Home({ token, handleLogout }) {
           </div>
         </div>
       ) : (
-        <div>
+          <div>
+            <h1>Welcome to the application.</h1>
+            <p>You can upload videos from the upload section and view them in the videos section.</p>
           <Outlet context={{ token: token }} />
         </div>
       )}
