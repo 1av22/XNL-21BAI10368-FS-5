@@ -1,0 +1,103 @@
+Prioritized Task List (Focus on Core Requirements)
+
+Given the limited time, we'll focus on the most crucial tasks to get a functional, albeit not fully polished, application.
+
+Phase 1: Authentication and Authorization Improvements (Critical)
+
+    Task 1: Implement Token Refresh (Frontend & Backend)
+        Priority: High (Essential for user experience)
+        Reason: Prevents frequent logouts, a core functionality issue.
+        Backend (src/routers/users.py, src/utils.py):
+            Implement a /refresh-token endpoint.
+            This endpoint should take a valid refresh token (you'll need to generate and store these) and issue a new access token.
+            Modify create_access_token to also create refresh tokens. Consider storing these in the database, associated with the user.
+            Modify decode_access_token to have different logic for access and refresh tokens.
+        Frontend (src/App.jsx, src/pages/LoginPage.jsx, src/components/Navbar.jsx, potentially a new auth utility file):
+            Modify handleLogin in App.jsx to store both access and refresh tokens.
+            Implement a function to check for token expiration.
+            Use Axios interceptors to:
+                Include the access token in the Authorization header for all requests.
+                Handle 401 (Unauthorized) errors:
+                    If the access token is expired, use the refresh token to get a new access token.
+                    Update the access token in local storage.
+                    Retry the original request.
+                    If the refresh token is also expired or invalid, redirect the user to the login page.
+            Modify Navbar.jsx to dispatch token refresh logic.
+
+    Task 2: Axios Interceptors (Frontend)
+        Priority: High (Improves code maintainability and reduces redundancy)
+        Reason: Simplifies API calls and centralizes authorization header management.
+        Frontend (A new src/utils/axiosInstance.js or similar):
+            Create an Axios instance.
+            Implement request and response interceptors as described in Task 1.
+            Use this Axios instance for all API calls in your components.
+
+Phase 2: Chat Enhancements (High)
+
+    Task 3: Implement Chat Rooms (Backend & Frontend)
+        Priority: High (Addresses a core functionality gap)
+        Reason: The current chat is not really usable without rooms.
+        Backend (src/routers/chat.py):
+            Modify the WebSocket endpoint to accept a room_id.
+            Update active_connections and ephemeral_messages to manage connections and messages per room (e.g., active_connections: dict[str, dict[str, list[WebSocket]]] = {} where the first key is the room id and the second key is the client id).
+            Modify the logic to send and receive messages within a specific room.
+            Consider how you will create and manage these room IDs (e.g., video ID as room ID, or separate room creation). For now, you can use a video id as the room id.
+        Frontend (src/pages/ChatPage.jsx):
+            Modify ChatPage.jsx to accept a room_id (e.g., from the video page or a room selection interface). You can use useParams from react-router-dom.
+            Update the WebSocket connection URL to include the room_id.
+            Test sending and receiving messages in different rooms.
+
+    Task 4: Chat Message Persistence (Backend - Optional, but Recommended)
+        Priority: Medium (Enhances the chat feature)
+        Reason: Saving messages provides history and a better user experience.
+        Backend (src/routers/chat.py, src/models.py, database modifications):
+            Modify the Message model in src/models.py to include room_id.
+            When a message is received via WebSocket, save it to the database.
+            When a user joins a chat room, fetch the message history for that room and send it to the user.
+
+Phase 3: Video Functionality (If Time Permits)
+
+    Task 5: Fix Sentiment Analysis (Backend)
+        Priority: Medium (Corrects a bug)
+        Reason: Sentiment analysis is currently broken.
+        Backend (src/routers/videos.py, src/services.py):
+            Modify the upload_video function in src/routers/videos.py to correctly extract the text to be analyzed. This might involve:
+                If you are planning to analyze the video, you will need to extract text from the video. This is complex and might not be achievable in the time remaining.
+                A simpler approach would be to analyze the video title or, even better, a description provided by the user during upload. You will need to add a field in the frontend for the user to add a description.
+            Pass the correct text to the analyze_sentiment function in src/services.py.
+
+    Task 6: Implement Video Description (Frontend & Backend)
+        Priority: Medium (Needed for Task 5)
+        Reason: To allow users to add a description for sentiment analysis.
+        Backend (src/models.py, src/routers/videos.py, database modifications):
+            Add a description field to the Video model in src/models.py.
+            Modify the /upload endpoint in src/routers/videos.py to accept and store the video description. You will need to modify the database table as well.
+        Frontend (src/pages/UploadPage.jsx):
+            Add an input field for the video description in UploadPage.jsx.
+            Include the description in the FormData when uploading the video.
+
+Phase 4: Testing and Refinement (If Time Permits)
+
+    Task 7: Basic Testing
+        Priority: Medium (Improves reliability)
+        Reason: To catch major errors.
+        Frontend & Backend:
+            Test the core functionality:
+                User registration and login.
+                Video upload and display.
+                Real-time chat in rooms.
+            Focus on manual testing given the time constraints.
+
+    Task 8: Code Cleanup and UI Improvements
+        Priority: Low (Polishes the application)
+        Reason: To improve the look and feel.
+        Frontend:
+            Address any obvious UI issues.
+            Improve styling where possible.
+
+Important Considerations:
+
+    Time Management: Stick to the priorities. If you're running out of time, skip the lower-priority tasks.
+    Clear Code: I will provide clear code snippets and explanations to help you implement the changes.
+    Focus on Functionality: Prioritize getting the core features working over making it look perfect.
+    Sleep: Get some rest! Working while exhausted leads to mistakes. Even a short break will help you focus.

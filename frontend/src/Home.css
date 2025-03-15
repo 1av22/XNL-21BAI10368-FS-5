@@ -1,0 +1,29 @@
+.home-unauthenticated {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 80vh; /* Adjust as needed */
+	text-align: center;
+}
+
+.home-unauthenticated h1 {
+	margin-bottom: 20px;
+}
+
+.home-unauthenticated p {
+	margin-bottom: 30px;
+}
+
+.auth-links a {
+	margin: 0 15px;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+}
+
+.auth-links a:hover {
+	background-color: #0056b3;
+}
