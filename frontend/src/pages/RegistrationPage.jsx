@@ -11,7 +11,7 @@ function RegistrationPage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:8000/register', {
+            const response = await axios.post('https://xnl-backend.onrender.com/register', {
                 username: username,
                 password: password,
             });

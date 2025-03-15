@@ -15,7 +15,7 @@ function ChatPage() {
         console.log("ChatPage - roomId:", roomId);
         console.log("ChatPage - clientId:", clientId);
 
-        ws.current = new WebSocket(`ws://127.0.0.1:8000/ws/${clientId}`); // Removed roomId
+        ws.current = new WebSocket(`wss://xnl-backend.onrender.com/ws/${clientId}`); // Updated to wss for secure connection
 
         ws.current.onopen = () => {
             console.log("WebSocket connected");

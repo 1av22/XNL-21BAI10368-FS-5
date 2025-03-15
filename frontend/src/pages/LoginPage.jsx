@@ -13,7 +13,7 @@ function LoginPage({ onLogin }) {
         event.preventDefault();
         try {
             const response = await axios.post(
-                'http://127.0.0.1:8000/token',
+                'https://xnl-backend.onrender.com/token',
                 qs.stringify({ username: username, password: password }),
                 {
                     headers: {
