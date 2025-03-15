@@ -64,6 +64,7 @@
 	max-width: 70%;
 	position: relative;
 	word-wrap: break-word;
+	margin-bottom: 0.5rem;
 }
 
 .message.system {
@@ -74,20 +75,37 @@
 	padding: 0.5rem 1rem;
 	max-width: 90%;
 	font-size: 0.9rem;
+	text-align: center;
 }
 
-.message:not(.system) {
+.message.received {
 	background: rgba(102, 252, 241, 0.1);
 	align-self: flex-start;
-	margin-left: 10px;
-	border-top-left-radius: 5px;
+	margin-right: auto;
+	border-bottom-left-radius: 5px;
 }
 
-.message.own-message {
+.message.sent {
 	background: rgba(102, 252, 241, 0.2);
 	align-self: flex-end;
-	margin-right: 10px;
-	border-top-right-radius: 5px;
+	margin-left: auto;
+	border-bottom-right-radius: 5px;
+}
+
+.message-content {
+	position: relative;
+}
+
+.message.sent .message-username {
+	text-align: right;
+}
+
+.message.sent .message-time {
+	text-align: right;
+}
+
+.message.received .message-time {
+	text-align: left;
 }
 
 .message-username {

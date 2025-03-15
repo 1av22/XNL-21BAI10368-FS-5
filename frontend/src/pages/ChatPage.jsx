@@ -105,17 +105,22 @@ function ChatPage() {
                         </div>
                     )}
                     {messages.map((msg, index) => (
-                        <div key={index} className={`message ${msg.type}`}>
+                        <div key={index} 
+                             className={`message ${msg.type === 'system' 
+                                 ? 'system' 
+                                 : msg.username === username 
+                                     ? 'sent' 
+                                     : 'received'}`}>
                             {msg.type === 'system' ? (
                                 <span className="system-message">{msg.message}</span>
                             ) : (
-                                <>
+                                <div className="message-content">
                                     <span className="message-username">{msg.username}</span>
                                     <span className="message-text">{msg.message}</span>
                                     <span className="message-time">
                                         {new Date(msg.timestamp).toLocaleTimeString()}
                                     </span>
-                                </>
+                                </div>
                             )}
                         </div>
                     ))}
